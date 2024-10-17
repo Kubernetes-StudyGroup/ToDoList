@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+</head>
+<body>
+    <h1>Todo List for User {{ user_id }}</h1>
+    
+    <!-- 添加任务的表单 -->
+    <form action="/add_todo" method="POST">
+        <input type="hidden" name="user_id" value="{{ user_id }}">
+        <input type="text" name="task" placeholder="Enter a task" required>
+        <button type="submit">Add Task</button>
+    </form>
+
+    <h2>Tasks:</h2>
+    <ul>
+        {% for todo in todos %}
+        <li>
+            {{ todo.task }}
+            <form action="/delete_todo/{{ todo.id }}" method="POST" style="display: inline;">
+                <input type="hidden" name="user_id" value="{{ user_id }}">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
