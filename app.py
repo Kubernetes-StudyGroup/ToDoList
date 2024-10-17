@@ -29,8 +29,8 @@ class Todo(db.Model):
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
 
 # 创建数据库表
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.create_all()
 
 # 获取所有待办事项
 @app.route('/', methods=['GET'])
