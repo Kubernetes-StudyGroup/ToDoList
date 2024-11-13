@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: todo-mysql-init
+  namespace: k8s-study-group
+data:
+  mysql_dump.sql: "-- MySQL dump 10.13  Distrib 8.4.2, for Linux (x86_64)\n--\n--
+    Host: localhost    Database: todos\n-- ------------------------------------------------------\n--
+    Server version\t8.4.2\n\nCREATE DATABASE IF NOT EXISTS todos;\nUSE todos;\n\n\n/*!40101
+    SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;\n/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS
+    */;\n/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;\n/*!50503
+    SET NAMES utf8mb4 */;\n/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;\n/*!40103 SET
+    TIME_ZONE='+00:00' */;\n/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0
+    */;\n/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0
+    */;\n/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;\n/*!40111
+    SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;\n\n--\n-- Table structure for
+    table `todo`\n--\n\nDROP TABLE IF EXISTS `todo`;\n/*!40101 SET @saved_cs_client
+    \    = @@character_set_client */;\n/*!50503 SET character_set_client = utf8mb4
+    */;\nCREATE TABLE `todo` (\n  `id` int NOT NULL AUTO_INCREMENT,\n  `task` varchar(255)
+    NOT NULL,\n  `user_id` int NOT NULL,\n  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,\n
+    \ PRIMARY KEY (`id`)\n) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4
+    COLLATE=utf8mb4_0900_ai_ci;\n/*!40101 SET character_set_client = @saved_cs_client
+    */;\n\n--\n-- Dumping data for table `todo`\n--\n\nLOCK TABLES `todo` WRITE;"
+
