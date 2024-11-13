@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: to-do-list
+  labels:
+    app: to-do-list
+spec:
+  containers:
+  - name: to-do-list
+    image: to-do-list:0.0.2
+    imagePullPolicy: Never
+    ports:
+    - containerPort: 5000
+    env:
+    - name: DB_HOSTNAME
+      valueFrom:
+        secretKeyRef:
+          name: mysql-secret-from-literal-518
+          key: RDS_HOSTNAME
+    - name: DB_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: mysql-secret-from-literal
+          key: RDS_PASSWORD
+
+  

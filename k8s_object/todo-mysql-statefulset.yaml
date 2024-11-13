@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: todo-mysql-statefulset
+  namespace: k8s-study-group
+spec:
+  selector:
+    matchLabels:
+      app: todo-mysql
+  serviceName: "todo-mysql-service"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: todo-mysql
+    spec:
+      containers:
+      - name: todo-mysql
+        image: mysql:latest
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: todo-secret
+              key: MYSQL_ROOT_PASSWORD
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+        - name: init-sql
+          mountPath: /docker-entrypoint-initdb.d
+      volumes:
+      - name: init-sql
+        configMap:
+          name: todo-mysql-init
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql-persistent-storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-mysql-service
+  namespace: k8s-study-group
+spec:
+  ports:
+  - port: 3306
+    targetPort: 3306
+  clusterIP: None  # 用於 Headless Service
+  selector:
+    app: todo-mysql

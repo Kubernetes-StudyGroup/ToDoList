@@ -1,4 +1,3 @@
-# ToDoList
 # API DOCUMENTS
 ### 1. User To Do List API
 This API returns a user's to-do list according to their ID.
