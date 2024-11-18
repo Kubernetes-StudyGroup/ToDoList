@@ -20,6 +20,6 @@
     ```
 5.  Port forwarding
     ```shell
-    kubectl port-forward service/raymond-news-server-svc 8080:8080 --namespace=k8s-study-group
+    kubectl port-forward service/todo-server-svc 8080:8080 --namespace=k8s-study-group
     ```
 8. Go to http://127.0.0.1:8080/?user_id=2
